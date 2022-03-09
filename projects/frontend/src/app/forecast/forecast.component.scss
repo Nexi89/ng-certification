@@ -1,0 +1,14 @@
+:host {
+  display: grid;
+  grid-gap: var(--ffs-spacing);
+  margin: var(--ffs-spacing);
+
+  > button {
+    justify-self: start;
+  }
+
+  img {
+    width: 2rem;
+    height: 2rem;
+  }
+}

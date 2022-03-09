@@ -1,3 +1,3 @@
 # WeatherForecast
 
-Please insert API_KEY in weather.service.ts
+Please insert API_KEY in weather-client.service.ts

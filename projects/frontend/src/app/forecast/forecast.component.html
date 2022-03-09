@@ -1,0 +1,10 @@
+<div *ngIf="forecast$ | async; let forecast" class="card">
+    <div class="card-header fw-bold">5-day forecast for {{forecast.name}}</div>
+    <ul class="list-group list-group-flush">
+        <li *ngFor="let day of forecast.days"
+            class="list-group-item d-flex justify-content-between align-items-center"><span>{{day.day}}: {{day.weather}}
+            - Min: {{day.tempMin}}
+            - Max: {{day.tempMax}}</span><img [src]="day.icon" alt="weather-icon"></li>
+    </ul>
+</div>
+<button class="btn btn-primary" routerLink="/">&lt; Back to main page</button>

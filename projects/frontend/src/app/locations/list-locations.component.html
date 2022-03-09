@@ -1,0 +1,4 @@
+<ng-container *ngFor="let location of locations | async">
+    <ffs-location-item (close)="delete($event)" (open)="openForecast($event)"
+                       [weather]="location"></ffs-location-item>
+</ng-container>

@@ -1,0 +1,21 @@
+<ng-container *ngIf="status$ | async; let status">
+    <button (click)="startTask()" *ngIf="status === 'default'" class="btn btn-info">
+        <span class="bi bi-play-fill"></span>
+        &nbsp;Run
+    </button>
+
+    <button *ngIf="status === 'pending'" class="btn btn-info" disabled>
+        <div class="spinner-border spinner-border-sm"></div>
+        &nbsp;Pending
+    </button>
+
+    <button (click)="startTask()" *ngIf="status === 'success'" class="btn btn-secondary">
+        <span class="bi bi-check-circle-fill"></span>
+        &nbsp;Done
+    </button>
+
+    <button (click)="startTask()" *ngIf="status === 'failure'" class="btn btn-warning">
+        <span class="bi bi-x-circle-fill"></span>
+        &nbsp;Failed
+    </button>
+</ng-container>

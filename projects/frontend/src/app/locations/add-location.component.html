@@ -1,0 +1,50 @@
+<div class="card">
+    <div class="card-body" [formGroup]="form">
+        <h2 class="card-title">Enter a zipcode:</h2>
+        <div class="grid row">
+            <div class="col">
+                <input formControlName="zipcode" class="form-control" placeholder="Zipcode"
+                       type="text">
+                <p [ngClass]="{invisible: !(form.get('zipcode')?.invalid && (form.get('zipcode')?.touched))}"
+                   class="card-text text-danger">Zipcode
+                    has to be 5 numbers long</p>
+            </div>
+            <div class="col">
+                <ffs-autocomplete placeholder="Country" formControlName="region" [items]="items"></ffs-autocomplete>
+                <p [ngClass]="{invisible: !(form.get('region')?.invalid && (form.get('region')?.touched))}"
+                   class="card-text text-danger">No country selected</p>
+            </div>
+        </div>
+
+        <ffs-status-button #container [custom]="true" [task]="addLocationTask">
+            <ng-container *ngIf="container.statusConsumer.getStatus | async; let state">
+                <button (click)="container.statusConsumer.startTask()" *ngIf="state === 'default'"
+                        [disabled]="form.invalid"
+                        class="btn btn-primary">
+                    <span class="bi bi-play-fill"></span>
+                    &nbsp;Add location
+                </button>
+
+                <button *ngIf="state === 'pending'" class="btn btn-primary" disabled>
+                    <div class="spinner-border spinner-border-sm"></div>
+                    <span>
+                      &nbsp;Adding...</span>
+                </button>
+
+                <button (click)="container.statusConsumer.startTask()" *ngIf="state === 'success'"
+                        [disabled]="form.invalid"
+                        class="btn btn-success">
+                    <span class="bi bi-check-circle-fill"></span>
+                    &nbsp;Done
+                </button>
+
+                <button (click)="container.statusConsumer.startTask()" *ngIf="state === 'failure'"
+                        [disabled]="form.invalid"
+                        class="btn btn-danger">
+                    <span class="bi bi-x-circle-fill"></span>
+                    &nbsp;Failed
+                </button>
+            </ng-container>
+        </ffs-status-button>
+    </div>
+</div>
