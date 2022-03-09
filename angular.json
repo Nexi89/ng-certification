@@ -3,12 +3,10 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "weather-forecast": {
+    "frontend": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "inlineTemplate": true,
-          "inlineStyle": true,
           "style": "scss",
           "skipTests": true
         },
@@ -27,6 +25,9 @@
         "@schematics/angular:pipe": {
           "skipTests": true
         },
+        "@schematics/angular:resolver": {
+          "skipTests": true
+        },
         "@schematics/angular:service": {
           "skipTests": true
         },
@@ -34,25 +35,24 @@
           "strict": true
         }
       },
-      "root": "",
-      "sourceRoot": "src",
+      "root": "projects/frontend",
+      "sourceRoot": "projects/frontend/src",
       "prefix": "ffs",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/weather-forecast",
-            "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.app.json",
-            "inlineStyleLanguage": "scss",
+            "outputPath": "dist/frontend",
+            "index": "projects/frontend/src/index.html",
+            "main": "projects/frontend/src/main.ts",
+            "polyfills": "projects/frontend/src/polyfills.ts",
+            "tsConfig": "projects/frontend/tsconfig.app.json",
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "projects/frontend/src/favicon.ico",
+              "projects/frontend/src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "projects/frontend/src/styles.scss"
             ],
             "scripts": []
           },
@@ -72,8 +72,8 @@
               ],
               "fileReplacements": [
                 {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "replace": "projects/frontend/src/environments/environment.ts",
+                  "with": "projects/frontend/src/environments/environment.prod.ts"
                 }
               ],
               "outputHashing": "all"
@@ -93,10 +93,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "weather-forecast:build:production"
+              "browserTarget": "frontend:build:production"
             },
             "development": {
-              "browserTarget": "weather-forecast:build:development"
+              "browserTarget": "frontend:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -104,11 +104,88 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "weather-forecast:build"
+            "browserTarget": "frontend:build"
+          }
+        }
+      }
+    },
+    "weather": {
+      "projectType": "library",
+      "root": "projects/weather",
+      "sourceRoot": "projects/weather/src",
+      "prefix": "ffs",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/weather/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/weather/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/weather/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        }
+      }
+    },
+    "status-button": {
+      "projectType": "library",
+      "root": "projects/status-button",
+      "sourceRoot": "projects/status-button/src",
+      "prefix": "ffs",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/status-button/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/status-button/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/status-button/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        }
+      }
+    },
+    "autocomplete": {
+      "projectType": "library",
+      "root": "projects/autocomplete",
+      "sourceRoot": "projects/autocomplete/src",
+      "prefix": "ffs",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/autocomplete/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/autocomplete/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/autocomplete/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/autocomplete/src/test.ts",
+            "tsConfig": "projects/autocomplete/tsconfig.spec.json",
+            "karmaConfig": "projects/autocomplete/karma.conf.js"
           }
         }
       }
     }
   },
-  "defaultProject": "weather-forecast"
+  "defaultProject": "frontend"
 }

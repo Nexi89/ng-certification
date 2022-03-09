@@ -21,7 +21,19 @@
     "lib": [
       "es2020",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@ffs/weather": [
+        "projects/weather/src/public-api.ts"
+      ],
+      "@ffs/status-button": [
+        "projects/status-button/src/public-api.ts"
+      ],
+      "autocomplete": [
+        "dist/autocomplete/autocomplete",
+        "dist/autocomplete"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

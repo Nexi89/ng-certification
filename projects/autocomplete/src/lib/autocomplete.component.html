@@ -1,0 +1,9 @@
+<div class="dropdown">
+    <input [(ngModel)]="input" [placeholder]="placeholder" autocomplete="false" class="form-control"
+           data-bs-toggle="dropdown"
+           id="dLabel">
+    <ul #dropdown class="dropdown-menu">
+        <ffs-autocomplete-item (click)="itemSelected(item)" *ngFor="let item of visibleItems"
+                               [item]="item"></ffs-autocomplete-item>
+    </ul>
+</div>

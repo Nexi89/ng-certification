@@ -1,0 +1,18 @@
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center">
+            <h4 class="card-title"> {{weather.name}} ({{weather.location.zipcode + ', ' + weather.location.country }}
+                )</h4>
+            <i (click)="onClose()" class="bi bi-x btn btn-link"></i>
+        </div>
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h5 class="card-text">Current conditions: {{weather.weather}}</h5>
+                <h5 class="card-text">Temperature today: </h5>
+                <p class="card-text">Current {{weather.temp}} - Max {{weather.tempMax}} - Min {{weather.tempMin}}</p>
+                <button (click)="onOpen()" class="btn btn-link p-0">Show 5-day forecast for {{weather.name}}</button>
+            </div>
+            <img [src]="weather.icon" alt="weather-icon" class="weather-icon">
+        </div>
+    </div>
+</div>
